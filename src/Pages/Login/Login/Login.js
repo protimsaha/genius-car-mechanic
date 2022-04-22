@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
 import SocialLogin from './SocialLogin/SocialLogin';
 
 const Login = () => {
@@ -12,7 +13,7 @@ const Login = () => {
         error
     ] = useSignInWithEmailAndPassword(auth);
 
-    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth)
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth)
 
     const navigate = useNavigate()
 
@@ -20,9 +21,7 @@ const Login = () => {
     if (error) {
         errorElement = <p className='text-danger'>Error: {error?.message}</p>
     }
-    if (user) {
-        navigate('/home')
-    }
+
     const emailRef = useRef('')
     const passwordRef = useRef('')
     const location = useLocation()
@@ -55,6 +54,7 @@ const Login = () => {
 
     return (
         <div className='w-50 container mx-auto border rounded my-5 p-5'>
+            <PageTitle title='Login'></PageTitle>
             <h2 className='text-center'>Please Login!!</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

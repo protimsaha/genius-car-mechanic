@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { async } from '@firebase/util';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
 
 
 const Signup = () => {
@@ -41,6 +42,7 @@ const Signup = () => {
 
     return (
         <div className='border p-5 mx-auto w-50 d-flex align-items-center my-5 flex-column'>
+            <PageTitle title='Signup'></PageTitle>
             <h2>Please Sign Up</h2>
             <form onSubmit={handleRegister}>
                 <input className='my-2' type="text" placeholder='Your Name' />
