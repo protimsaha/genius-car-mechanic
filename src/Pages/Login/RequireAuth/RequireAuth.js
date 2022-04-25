@@ -12,7 +12,7 @@ const RequireAuth = ({ children }) => {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
     if (user.providerData[0].providerId === 'password' && !user.emailVerified) {
-        return <div>
+        return (<div>
             <h3 className='text-danger'>Your Email is not verified</h3>
             <h5 className='text-success'>Please verifie your email</h5>
             <button onClick={async () => {
@@ -21,7 +21,7 @@ const RequireAuth = ({ children }) => {
             }}>
                 Verify Email Again
             </button>
-        </div>
+        </div>)
     }
 
     return children;

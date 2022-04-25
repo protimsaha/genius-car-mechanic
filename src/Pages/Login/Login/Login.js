@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -30,17 +31,20 @@ const Login = () => {
 
 
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault()
         const email = emailRef.current.value
         const password = passwordRef.current.value
-        console.log(email, password)
 
-        signInWithEmailAndPassword(email, password)
+        await signInWithEmailAndPassword(email, password);
+        const { data } = await axios.post('https://gentle-mountain-33302.herokuapp.com/login', { email })
+
+        localStorage.setItem('accessToken', data?.accessToken)
+        navigate(from, { replace: true });
+
     }
 
     if (user) {
-        navigate(from, { replace: true });
     }
 
     const handleToRegister = () => {
